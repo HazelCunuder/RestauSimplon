@@ -1,0 +1,247 @@
+[
+  {
+    "Nom": "Bruschetta",
+    "Categorie": "Entrée",
+    "Prix": 6.5
+  },
+  {
+    "Nom": "Salade César",
+    "Categorie": "Entrée",
+    "Prix": 7.0
+  },
+  {
+    "Nom": "Mozzarella sticks",
+    "Categorie": "Entrée",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Caprese",
+    "Categorie": "Entrée",
+    "Prix": 6.0
+  },
+  {
+    "Nom": "Soup minestrone",
+    "Categorie": "Entrée",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Pizza Margherita",
+    "Categorie": "Plat",
+    "Prix": 9.5
+  },
+  {
+    "Nom": "Pizza Regina",
+    "Categorie": "Plat",
+    "Prix": 11.0
+  },
+  {
+    "Nom": "Pizza Quatre Saisons",
+    "Categorie": "Plat",
+    "Prix": 12.5
+  },
+  {
+    "Nom": "Pizza Calzone",
+    "Categorie": "Plat",
+    "Prix": 10.5
+  },
+  {
+    "Nom": "Pizza Végétarienne",
+    "Categorie": "Plat",
+    "Prix": 11.5
+  },
+  {
+    "Nom": "Pizza Hawaïenne",
+    "Categorie": "Plat",
+    "Prix": 12.0
+  },
+  {
+    "Nom": "Lasagnes",
+    "Categorie": "Plat",
+    "Prix": 13.5
+  },
+  {
+    "Nom": "Risotto aux champignons",
+    "Categorie": "Plat",
+    "Prix": 14.0
+  },
+  {
+    "Nom": "Spaghetti Carbonara",
+    "Categorie": "Plat",
+    "Prix": 11.0
+  },
+  {
+    "Nom": "Spaghetti Bolognese",
+    "Categorie": "Plat",
+    "Prix": 10.5
+  },
+  {
+    "Nom": "Tiramisu",
+    "Categorie": "Dessert",
+    "Prix": 6.5
+  },
+  {
+    "Nom": "Panna Cotta",
+    "Categorie": "Dessert",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Gelato (3 boules)",
+    "Categorie": "Dessert",
+    "Prix": 4.5
+  },
+  {
+    "Nom": "Pizza au Nutella",
+    "Categorie": "Dessert",
+    "Prix": 8.0
+  },
+  {
+    "Nom": "Fondant au chocolat",
+    "Categorie": "Dessert",
+    "Prix": 6.0
+  },
+  {
+    "Nom": "Cheesecake",
+    "Categorie": "Dessert",
+    "Prix": 6.5
+  },
+  {
+    "Nom": "Tarte aux pommes",
+    "Categorie": "Dessert",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Café gourmand",
+    "Categorie": "Dessert",
+    "Prix": 7.5
+  },
+  {
+    "Nom": "Crème brûlée",
+    "Categorie": "Dessert",
+    "Prix": 6.0
+  },
+  {
+    "Nom": "Soufflé au citron",
+    "Categorie": "Dessert",
+    "Prix": 6.5
+  },
+  {
+    "Nom": "Pizza Pepperoni",
+    "Categorie": "Plat",
+    "Prix": 13.0
+  },
+  {
+    "Nom": "Pizza Quatre Fromages",
+    "Categorie": "Plat",
+    "Prix": 12.5
+  },
+  {
+    "Nom": "Salade Capricciosa",
+    "Categorie": "Entrée",
+    "Prix": 7.5
+  },
+  {
+    "Nom": "Soupe à l'oignon",
+    "Categorie": "Entrée",
+    "Prix": 6.0
+  },
+  {
+    "Nom": "Antipasto",
+    "Categorie": "Entrée",
+    "Prix": 8.0
+  },
+  {
+    "Nom": "Focaccia",
+    "Categorie": "Entrée",
+    "Prix": 4.5
+  },
+  {
+    "Nom": "Cannelloni ricotta épinards",
+    "Categorie": "Plat",
+    "Prix": 14.0
+  },
+  {
+    "Nom": "Tagliatelles aux truffes",
+    "Categorie": "Plat",
+    "Prix": 16.0
+  },
+  {
+    "Nom": "Pizza Napolitaine",
+    "Categorie": "Plat",
+    "Prix": 10.5
+  },
+  {
+    "Nom": "Pizza Bianca",
+    "Categorie": "Plat",
+    "Prix": 11.0
+  },
+  {
+    "Nom": "Pizza Prosciutto",
+    "Categorie": "Plat",
+    "Prix": 12.5
+  },
+  {
+    "Nom": "Pizza Diavola",
+    "Categorie": "Plat",
+    "Prix": 13.5
+  },
+  {
+    "Nom": "Gâteau à la ricotta",
+    "Categorie": "Dessert",
+    "Prix": 7.0
+  },
+  {
+    "Nom": "Affogato al caffè",
+    "Categorie": "Dessert",
+    "Prix": 6.0
+  },
+  {
+    "Nom": "Pizza Artichaut",
+    "Categorie": "Plat",
+    "Prix": 12.0
+  },
+  {
+    "Nom": "Tarte Tatin",
+    "Categorie": "Dessert",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Escalope milanaise",
+    "Categorie": "Plat",
+    "Prix": 15.0
+  },
+  {
+    "Nom": "Ossobuco",
+    "Categorie": "Plat",
+    "Prix": 18.0
+  },
+  {
+    "Nom": "Pizza Marinara",
+    "Categorie": "Plat",
+    "Prix": 9.5
+  },
+  {
+    "Nom": "Polenta crémeuse",
+    "Categorie": "Plat",
+    "Prix": 10.0
+  },
+  {
+    "Nom": "Pasta al pesto",
+    "Categorie": "Plat",
+    "Prix": 11.5
+  },
+  {
+    "Nom": "Aubergines parmigiana",
+    "Categorie": "Plat",
+    "Prix": 13.0
+  },
+  {
+    "Nom": "Zabaione",
+    "Categorie": "Dessert",
+    "Prix": 5.5
+  },
+  {
+    "Nom": "Pizza Capricciosa",
+    "Categorie": "Plat",
+    "Prix": 14.0
+  }
+]

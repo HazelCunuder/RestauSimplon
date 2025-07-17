@@ -49,6 +49,10 @@ namespace RestauSimplon
             // -- Appelle la méthode permettant de générer les endpoints de /clients --
             app.MapGroup("/clients").MapClientsEndpoints();
 
+
+            // -- Appelle la méthode permettant de générer les endpoints de /commande -- REFACTO --
+            GestionCommande.MapEndpoints(app);
+
             // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
 
@@ -63,6 +67,7 @@ namespace RestauSimplon
             }
 
             app.Run();
+
         }
     }
 }

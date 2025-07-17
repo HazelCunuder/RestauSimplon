@@ -17,6 +17,8 @@ namespace RestauSimplon
             // -- Ajout de la BDD SQLite avec les infos de clients --
             builder.Services.AddDbContext<ClientsDb>(opt => opt.UseSqlite("Data Source=ClientsDb.db"));
 
+            builder.Services.AddDbContext<GroupCommandeDb>(opt => opt.UseSqlite("Data Source=GroupCommandeDb.db"));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -46,6 +48,9 @@ namespace RestauSimplon
 
             // -- Appelle la méthode permettant de générer les endpoints de /clients --
             app.MapGroup("/clients").MapClientsEndpoints();
+
+            // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
+            app.MapGroup("/groupe-commandes").MapGroupEndpoints();
 
             if (app.Environment.IsDevelopment())
             {

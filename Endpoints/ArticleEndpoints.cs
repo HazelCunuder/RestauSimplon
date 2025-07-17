@@ -56,6 +56,53 @@ namespace RestauSimplon.Endpoints
             return group;
         }
 
+        static async Task<IResult> RecupererListeArticle(ArticleDb db)
+        {
+            return TypedResults.Ok(await db.Articles.Select(x => new ArticleDTO(x)).ToArrayAsync());
+        }
 
+        static async Task<IResult> CreerArticle(ArticleDTO articlesDTO, ArticleDb db)
+        {
+            var article = new Article
+            {
+                Nom = articlesDTO.Nom,
+                Categorie = articlesDTO.Categorie,
+                Prix = articlesDTO.Prix,
+            };
+
+            db.Articles.Add(article);
+            await db.SaveChangesAsync();
+
+            articlesDTO = new ArticleDTO(article);
+
+            return TypedResults.Created($"/articles/{article.Id}", articlesDTO);
+        }
+
+        static async Task<IResult> MettreAJourArticle(int id, ArticleDTO articleDTO, ArticleDb db)
+        {
+            var article = await db.Articles.FindAsync(id);
+
+            if (article is null) return TypedResults.NotFound();
+
+            article.Nom = articleDTO.Nom;
+            article.Categorie = articleDTO.Categorie;
+            article.Prix = articleDTO.Prix;
+
+            await db.SaveChangesAsync();
+
+            return TypedResults.NoContent();
+        }
+
+        static async Task<IResult> SupprimerArticle(int id, ArticleDb db)
+        {
+            if (await db.Articles.FindAsync(id) is Article article)
+            {
+                db.Articles.Remove(article);
+                await db.SaveChangesAsync();
+                return TypedResults.NoContent();
+            }
+
+            return TypedResults.NotFound();
+        }
     }
 }

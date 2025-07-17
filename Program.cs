@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+Ôªøusing Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RestauSimplon.Data_Existante;
 using RestauSimplon.Endpoints;
@@ -26,7 +26,7 @@ namespace RestauSimplon
                 {
                     Title = "RestauSimplon",
                     Version = "v1",
-                    Description = "Une API pour gÈrer les clients et commandes du restaurant",
+                    Description = "Une API pour g√©rer les clients et commandes du restaurant",
                     Contact = new OpenApiContact
                     {
                         Name = "Groupe Best",
@@ -39,6 +39,15 @@ namespace RestauSimplon
 
             var app = builder.Build();
 
+// -- Ajout de plats.json dans la BDD --
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
+    Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
+}
+
+
+
             // -- Ajout de clients.json dans la BDD --
             using (var scope = app.Services.CreateScope())
             {
@@ -46,10 +55,16 @@ namespace RestauSimplon
                 Task.Run(() => ClientSeeder.SeedAsync(db)).Wait();
             }
 
-            // -- Appelle la mÈthode permettant de gÈnÈrer les endpoints de /clients --
+            // -- Appelle la m√©thode permettant de g√©n√©rer les endpoints de /clients --
             app.MapGroup("/clients").MapClientsEndpoints();
 
-            // -- Appelle la mÈthode permettant de gÈnÈrer les endpoints de /groupes-commandes --
+            // -- Appelle la methode permettant de generer les endpoints de /articles --
+            app.MapGroup("/articles").MapArticleEndpoints();
+
+            // -- Appelle la m√©thode permettant de g√©n√©rer les endpoints de /commande -- REFACTO --
+            GestionCommande.MapEndpoints(app);
+
+            // -- Appelle la m√©thode permettant de g√©n√©rer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
 
             if (app.Environment.IsDevelopment())
@@ -61,6 +76,7 @@ namespace RestauSimplon
                     c.RoutePrefix = "";
                 });
             }
+
 
             app.Run();
         }

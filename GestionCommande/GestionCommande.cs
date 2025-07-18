@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestauSimplon.GestionArticle;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 
 /*3.Gestion des commandes :
@@ -92,6 +94,16 @@ public static class GestionCommande
     // Création d'une commande
     public static async Task<IResult> CreationCommande(CommandeItemDTO dto, CommandeDb db)
     {
+
+        var validationResults = new List<ValidationResult>();
+        var contextValidation = new ValidationContext(dto, null, null);
+
+        if (!Validator.TryValidateObject(dto, contextValidation, validationResults, true))
+        {
+            var errors = validationResults.Select(v => v.ErrorMessage);
+            return TypedResults.BadRequest(new { Errors = errors });
+        }
+
         decimal total = 0;
 
         // Calcul automatique
@@ -115,6 +127,16 @@ public static class GestionCommande
     // Mise à jour (statut, total)
     public static async Task<IResult> MajCommande(int id, CommandeItemDTO commandeItemDTO, CommandeDb db)
     {
+
+        var validationResults = new List<ValidationResult>();
+        var contextValidation = new ValidationContext(commandeItemDTO, null, null);
+
+        if (!Validator.TryValidateObject(commandeItemDTO, contextValidation, validationResults, true))
+        {
+            var errors = validationResults.Select(v => v.ErrorMessage);
+            return TypedResults.BadRequest(new { Errors = errors });
+        }
+
         var commande = await db.Commandes.FindAsync(id);
         if (commande is null) return TypedResults.NotFound();
 

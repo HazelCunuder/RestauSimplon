@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestauSimplon.GestionClient;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestauSimplon.Endpoints
 {
@@ -51,6 +52,15 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> CreerGroupe(GroupCommandeDTO GroupCommandeDTO, GroupCommandeDb db)
         {
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(GroupCommandeDTO, null, null);
+
+            if (!Validator.TryValidateObject(GroupCommandeDTO, contextValidation, validationResults, true))
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
+
             var commandeGroupe = new GroupCommande
             {
                 Id = GroupCommandeDTO.Id,
@@ -69,6 +79,16 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> MettreAJourGroupe(int id, GroupCommandeDTO groupCommandeDTO, GroupCommandeDb db)
         {
+
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(groupCommandeDTO, null, null);
+
+            if (!Validator.TryValidateObject(groupCommandeDTO, contextValidation, validationResults, true))
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
+
             var commandeGroupe = await db.GroupCommande.FindAsync(id);
 
             if (commandeGroupe is null) return TypedResults.NotFound();

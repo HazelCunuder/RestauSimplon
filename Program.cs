@@ -18,8 +18,8 @@ namespace RestauSimplon
 
             builder.Services.AddDbContext<GroupCommandeDb>(opt => opt.UseSqlite("Data Source=GroupCommandeDb.db"));
 
-            builder.Services.AddDbContext<ArticleDb>(opt => opt.UseSqlite("Data Source=ArticlesDb.db"));
-
+            builder.Services.AddDbContext<ArticleDb>(opt => opt.UseSqlite("Data Source=ArticleDb.db"));
+          
             builder.Services.AddDbContext<CommandeDb>(opt => opt.UseSqlite("Data Source=CommandeDb.db"));
 
             builder.Services.AddEndpointsApiExplorer();
@@ -42,15 +42,12 @@ namespace RestauSimplon
 
             var app = builder.Build();
 
-// -- Ajout de plats.json dans la BDD --
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
-    Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
-}
-
-
-
+            // -- Ajout de plats.json dans la BDD --
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
+                Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
+            }
             // -- Ajout de clients.json dans la BDD --
             using (var scope = app.Services.CreateScope())
             {
@@ -65,7 +62,7 @@ using (var scope = app.Services.CreateScope())
             app.MapGroup("/articles").MapArticleEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /commandes --
-            app.MapGroup("/commandes").MapArticleEndpoints();
+            app.MapGroup("/commandes").MapCommandeEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
@@ -80,9 +77,7 @@ using (var scope = app.Services.CreateScope())
                 });
             }
 
-
             app.Run();
-
         }
     }
 }

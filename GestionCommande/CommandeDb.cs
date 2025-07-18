@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestauSimplon.GestionClient;
 
 public class CommandeDb : DbContext
 {
@@ -6,4 +7,5 @@ public class CommandeDb : DbContext
         : base(options) { }
 
     public DbSet<Commande> Commandes => Set<Commande>();
+    public DbSet<GroupCommande> GroupCommande => Set<GroupCommande>();
 }

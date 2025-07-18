@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestauSimplon.GestionClient;
 using Swashbuckle.AspNetCore.Annotations;
+using RestauSimplon.GestionCommande;
 
 namespace RestauSimplon.Endpoints
 {
@@ -9,7 +10,7 @@ namespace RestauSimplon.Endpoints
         // -- Méthode permettant de créer les différents Endpoints pour l'association commande/menu --
         public static RouteGroupBuilder MapGroupEndpoints(this RouteGroupBuilder group)
         {
-            // -- Read la table client --
+            // -- Récupère la liste des GroupCommande --
             group.MapGet("/", RecupererListeGroupe)
                 .WithMetadata(new SwaggerOperationAttribute(
                     summary: "Récupère tous les GroupCommande",
@@ -17,29 +18,29 @@ namespace RestauSimplon.Endpoints
                 .WithMetadata(new SwaggerResponseAttribute(200, "Liste des GroupCommande trouvée"))
                 .WithMetadata(new SwaggerResponseAttribute(404, "Impossible de trouver la liste"));
 
-            // -- Create une nouvelle ligne dans la table client --
+            // -- Création d'un GroupCommande --
             group.MapPost("/", CreerGroupe)
                 .WithMetadata(new SwaggerOperationAttribute(
-                    summary: "Rajouter un client",
-                    description: "Rajoute un client dans la base de donnée"))
-                .WithMetadata(new SwaggerResponseAttribute(200, "Client ajouté"))
-                .WithMetadata(new SwaggerResponseAttribute(404, "Erreur de l'ajout client"));
+                    summary: "Créer un GroupCommande ",
+                    description: "Permet de créer un GroupCommande du restaurant"))
+                .WithMetadata(new SwaggerResponseAttribute(200, "Création d'un GroupCommande"))
+                .WithMetadata(new SwaggerResponseAttribute(404, "Impossible de créer un GroupCommande"));
 
-            // -- Update une ligne de la table client --
+            // -- Mise a jour d'un GroupCommande --
             group.MapPut("/{id}", MettreAJourGroupe)
                 .WithMetadata(new SwaggerOperationAttribute(
-                    summary: "Mettre à jour un client",
-                    description: "Mets à jour les informations d'un client"))
-                .WithMetadata(new SwaggerResponseAttribute(200, "Informations modifiées"))
-                .WithMetadata(new SwaggerResponseAttribute(404, "Impossible de retrouver le client"));
+                    summary: "Mettre à jour un GroupCommand",
+                    description: "Mets à jour un GroupCommand"))
+                .WithMetadata(new SwaggerResponseAttribute(200, "Le GroupCommand a été modifié"))
+                .WithMetadata(new SwaggerResponseAttribute(404, "Impossible de modifier le GroupCommand"));
 
-            // -- Delete une ligne de la table client --
+            // -- Supprimer un GroupCommand --
             group.MapDelete("/{id}", SupprimerGroupe)
                 .WithMetadata(new SwaggerOperationAttribute(
-                    summary: "Supprime un client",
-                    description: "Permet de retirer un client de notre base de donnée"))
-                .WithMetadata(new SwaggerResponseAttribute(200, "Client supprimé"))
-                .WithMetadata(new SwaggerResponseAttribute(404, "Le Client n'existe pas"));
+                    summary: "Supprime un GroupCommand",
+                    description: "Permet de supprimer un GroupCommand"))
+                .WithMetadata(new SwaggerResponseAttribute(200, "GroupCOmmand supprimé"))
+                .WithMetadata(new SwaggerResponseAttribute(404, "Le GroupCommand n'existe pas"));
 
             return group;
         }

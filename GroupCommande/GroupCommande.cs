@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using RestauSimplon.GestionArticle;
 
 namespace RestauSimplon.GestionClient
 {

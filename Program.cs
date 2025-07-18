@@ -65,7 +65,7 @@ using (var scope = app.Services.CreateScope())
             app.MapGroup("/articles").MapArticleEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /commandes --
-            app.MapGroup("/commandes").MapArticleEndpoints();
+            app.MapGroup("/commandes").MapCommandeEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();

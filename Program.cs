@@ -1,10 +1,9 @@
-using Microsoft.EntityFrameworkCore;
+ï»¿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RestauSimplon.Data_Existante;
 using RestauSimplon.Endpoints;
+using RestauSimplon.GestionArticle;
 using RestauSimplon.GestionClient;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Numerics;
 
 namespace RestauSimplon
 {
@@ -19,6 +18,10 @@ namespace RestauSimplon
 
             builder.Services.AddDbContext<GroupCommandeDb>(opt => opt.UseSqlite("Data Source=GroupCommandeDb.db"));
 
+            builder.Services.AddDbContext<ArticleDb>(opt => opt.UseSqlite("Data Source=ArticlesDb.db"));
+
+            builder.Services.AddDbContext<CommandeDb>(opt => opt.UseSqlite("Data Source=CommandeDb.db"));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -26,7 +29,7 @@ namespace RestauSimplon
                 {
                     Title = "RestauSimplon",
                     Version = "v1",
-                    Description = "Une API pour gérer les clients et commandes du restaurant",
+                    Description = "Une API pour gÃ©rer les clients et commandes du restaurant",
                     Contact = new OpenApiContact
                     {
                         Name = "Groupe Best",
@@ -39,6 +42,15 @@ namespace RestauSimplon
 
             var app = builder.Build();
 
+// -- Ajout de plats.json dans la BDD --
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
+    Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
+}
+
+
+
             // -- Ajout de clients.json dans la BDD --
             using (var scope = app.Services.CreateScope())
             {
@@ -46,14 +58,16 @@ namespace RestauSimplon
                 Task.Run(() => ClientSeeder.SeedAsync(db)).Wait();
             }
 
-            // -- Appelle la méthode permettant de générer les endpoints de /clients --
+            // -- Appelle la mÃ©thode permettant de gÃ©nÃ©rer les endpoints de /clients --
             app.MapGroup("/clients").MapClientsEndpoints();
 
+            // -- Appelle la methode permettant de generer les endpoints de /articles --
+            app.MapGroup("/articles").MapArticleEndpoints();
 
-            // -- Appelle la méthode permettant de générer les endpoints de /commande -- REFACTO --
-            GestionCommande.MapEndpoints(app);
+            // -- Appelle la mÃ©thode permettant de gÃ©nÃ©rer les endpoints de /commandes --
+            app.MapGroup("/commandes").MapArticleEndpoints();
 
-            // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
+            // -- Appelle la mÃ©thode permettant de gÃ©nÃ©rer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
 
             if (app.Environment.IsDevelopment())
@@ -65,6 +79,7 @@ namespace RestauSimplon
                     c.RoutePrefix = "";
                 });
             }
+
 
             app.Run();
 

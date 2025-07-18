@@ -29,7 +29,8 @@ namespace RestauSimplon
                 {
                     Title = "RestauSimplon",
                     Version = "v1",
-                    Description = "Une API pour gérer les clients et commandes du restaurant",
+                    Description = 
+                    "Une API pour gérer les clients et commandes du restaurant",
                     Contact = new OpenApiContact
                     {
                         Name = "Groupe Best",

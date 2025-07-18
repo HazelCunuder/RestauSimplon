@@ -2,9 +2,8 @@
 using Microsoft.OpenApi.Models;
 using RestauSimplon.Data_Existante;
 using RestauSimplon.Endpoints;
+using RestauSimplon.GestionArticle;
 using RestauSimplon.GestionClient;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Numerics;
 
 namespace RestauSimplon
 {
@@ -18,6 +17,10 @@ namespace RestauSimplon
             builder.Services.AddDbContext<ClientsDb>(opt => opt.UseSqlite("Data Source=ClientsDb.db"));
 
             builder.Services.AddDbContext<GroupCommandeDb>(opt => opt.UseSqlite("Data Source=GroupCommandeDb.db"));
+
+            builder.Services.AddDbContext<ArticleDb>(opt => opt.UseSqlite("Data Source=ArticlesDb.db"));
+
+            builder.Services.AddDbContext<CommandeDb>(opt => opt.UseSqlite("Data Source=CommandeDb.db"));
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
@@ -61,8 +64,8 @@ using (var scope = app.Services.CreateScope())
             // -- Appelle la methode permettant de generer les endpoints de /articles --
             app.MapGroup("/articles").MapArticleEndpoints();
 
-            // -- Appelle la méthode permettant de générer les endpoints de /commande -- REFACTO --
-            GestionCommande.MapEndpoints(app);
+            // -- Appelle la méthode permettant de générer les endpoints de /commandes --
+            app.MapGroup("/commandes").MapArticleEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
@@ -79,6 +82,7 @@ using (var scope = app.Services.CreateScope())
 
 
             app.Run();
+
         }
     }
 }

@@ -1,73 +1,71 @@
----
-
 # API RestauSimplon
 
-## Table des matières
+## Table des matiÃ¨res
 
-- [Présentation du projet](#présentation-du-projet)
+- [PrÃ©sentation du projet](#prÃ©sentation-du-projet)
 - [Objectif](#objectif)
-- [Technologies utilisées](#technologies-utilisées)
-- [Fonctionnalités](#fonctionnalités)
+- [Technologies utilisÃ©es](#technologies-utilisÃ©es)
+- [FonctionnalitÃ©s](#fonctionnalitÃ©s)
 - [Configuration](#configuration)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
 - [Endpoints de l'API](#endpoints-de-lapi)
-- [Crédits](#crédits)
+- [CrÃ©dits](#crÃ©dits)
 
 ---
 
-## Présentation du projet
+## PrÃ©sentation du projet
 
-Dans le cadre de notre formation Développeur C#/.NET à SIMPLON HdF, nous avons eu pour tâche de créer une API pour le restaurant RestauSimplon. Ce dernier a besoin d'une API pour simplifier la gestion de ses commandes et de ses clients.
+Dans le cadre de notre formation DÃ©veloppeur C#/.NET Ã  SIMPLON HdF, nous avons eu pour tÃ¢che de crÃ©er une API pour le restaurant RestauSimplon. Ce dernier a besoin d'une API pour simplifier la gestion de ses commandes et de ses clients.
 
 ## Objectif
 
 L'objectif principal de cette API est de **digitaliser** la gestion des commandes du restaurant. L'API doit permettre au restaurant de :
 
-- Gérer les articles du menu (ajout, modification, suppression).
-- Gérer les clients (enregistrer leurs informations, consulter l'historique de leurs commandes).
-- Suivre les commandes (création, consultation par date ou client, calcul des montants, mise à jour des statuts).
+- GÃ©rer les articles du menu (ajout, modification, suppression).
+- GÃ©rer les clients (enregistrer leurs informations, consulter l'historique de leurs commandes).
+- Suivre les commandes (crÃ©ation, consultation par date ou client, calcul des montants, mise Ã  jour des statuts).
 
-## Technologies utilisées
+## Technologies utilisÃ©es
 
-- **C#** : Langage de programmation principal pour le développement de l'API.
-- **ASP.NET Core** : Framework utilisé pour construire des applications web et des API robustes et performantes.
-- **SQLite** : Base de données légère et embarquée, idéale pour les projets de petite à moyenne envergure.
+- **C#** : Langage de programmation principal pour le dÃ©veloppement de l'API.
+- **ASP.NET Core** : Framework utilisÃ© pour construire des applications web et des API robustes et performantes.
+- **SQLite** : Base de donnÃ©es lÃ©gÃ¨re et embarquÃ©e, idÃ©ale pour les projets de petite Ã  moyenne envergure.
 - **Swagger** : Outil de visualisation et d'interaction avec les endpoints de l'API, facilitant la documentation et les tests.
 
-## Fonctionnalités
+## FonctionnalitÃ©s
 
-L'API RestauSimplon offre les fonctionnalités suivantes :
+L'API RestauSimplon offre les fonctionnalitÃ©s suivantes :
 
-- **Gestion des articles** : CRUD (Créer, Lire, Mettre à jour, Supprimer) des articles du menu (nom, description, prix, catégorie).
-- **Gestion des clients** : Enregistrement et consultation des informations client (nom, prénom, coordonnées).
+- **Gestion des articles** : CRUD (CrÃ©er, Lire, Mettre Ã  jour, Supprimer) des articles du menu (nom, description, prix, catÃ©gorie).
+- **Gestion des clients** : Enregistrement et consultation des informations client (nom, prÃ©nom, coordonnÃ©es).
 - **Gestion des commandes** :
-    - Création de nouvelles commandes avec association à un client et ajout d'articles.
+    - CrÃ©ation de nouvelles commandes avec association Ã  un client et ajout d'articles.
     - Consultation des commandes par date ou par client.
     - Calcul automatique du montant total d'une commande.
-    - Mise à jour du statut des commandes (en préparation, prête, livrée, annulée).
+    - Mise Ã  jour du statut des commandes (en prÃ©paration, prÃªte, livrÃ©e, annulÃ©e).
 
 ## Configuration
 
-Pour configurer et exécuter l'API, suivez les étapes ci-dessous.
+Pour configurer et exÃ©cuter l'API, suivez les Ã©tapes ci-dessous.
 
-1.  **Prérequis** : Assurez-vous d'avoir le SDK .NET 8.0 (ou version supérieure) installé sur votre machine.
-2.  **Clonage du dépôt** : Clonez le dépôt GitHub de l'API sur votre machine locale :
+1.  **PrÃ©requis** : Assurez-vous d'avoir le SDK .NET 8.0 (ou version supÃ©rieure) installÃ© sur votre machine.
+2.  **Clonage du dÃ©pÃ´t** : Clonez le dÃ©pÃ´t GitHub de l'API sur votre machine locale :
     
     ```bash
     git clone [https://github.com/votre-utilisateur/RestauSimplonAPI.git](https://github.com/votre-utilisateur/RestauSimplonAPI.git)
     cd RestauSimplonAPI
     ```
  
-3.  **Base de données** : SQLite ne nécessite pas de serveur de base de données externe. Le fichier de base de données sera créé automatiquement lors de la première exécution de l'API, ou lors des migrations Entity Framework Core.
+3.  **Base de donnÃ©es** : SQLite ne nÃ©cessite pas de serveur de base de donnÃ©es externe. Le fichier de base de donnÃ©es sera crÃ©Ã© automatiquement lors de la premiÃ¨re exÃ©cution de l'API, ou lors des migrations Entity Framework Core.
     
-    *Si vous utilisez Entity Framework Core Migrations, vous devrez peut-être exécuter les commandes suivantes pour créer ou mettre à jour la base de données \:*
+    *Si vous utilisez Entity Framework Core Migrations, vous devrez peut-Ãªtre exÃ©cuter les commandes suivantes pour crÃ©er ou mettre Ã  jour la base de donnÃ©es \:*
     
     ```bash
     dotnet ef database update
     ```
  
-    *Assurez-vous d'avoir les outils Entity Framework Core installés \:*
+    *Assurez-vous d'avoir les outils Entity Framework Core installÃ©s \:*
     
     ```bash
     dotnet tool install --global dotnet-ef
@@ -75,7 +73,7 @@ Pour configurer et exécuter l'API, suivez les étapes ci-dessous.
 
 ## Installation
 
-Pour installer les dépendances du projet :
+Pour installer les dÃ©pendances du projet :
 
 ```bash
 dotnet restore
@@ -83,18 +81,18 @@ dotnet restore
 
 ## Utilisation
 
-Pour démarrer l'API, exécutez la commande suivante depuis le répertoire racine du projet :
+Pour dÃ©marrer l'API, exÃ©cutez la commande suivante depuis le rÃ©pertoire racine du projet :
 
 ```bash
 dotnet run
 ```
 
-L'API sera accessible par défaut sur https://localhost:7000 (le port peut varier selon votre configuration ou si un autre processus utilise ce port).
+L'API sera accessible par dÃ©faut sur https://localhost:7000 (le port peut varier selon votre configuration ou si un autre processus utilise ce port).
 
-## Crédits
+## CrÃ©dits
 
-Ce projet a été réalisé dans le cadre de la formation Développeur C#/.NET chez SIMPLON Hauts-de-France.
-Équipe projet :
+Ce projet a Ã©tÃ© rÃ©alisÃ© dans le cadre de la formation DÃ©veloppeur C#/.NET chez SIMPLON Hauts-de-France.
+Ã‰quipe projet :
 
 - Amine BENFETTA
 
@@ -102,4 +100,4 @@ Ce projet a été réalisé dans le cadre de la formation Développeur C#/.NET chez S
 
 - Vincent FAIVRE
 
-Merci à l’équipe pédagogique de SIMPLON et à nos formateurs Alexandre LINE et Benjamin QUINET pour leur accompagnement..
+Merci Ã  lâ€™Ã©quipe pÃ©dagogique de SIMPLON et Ã  nos formateurs Alexandre LINE et Benjamin QUINET pour leur accompagnement.

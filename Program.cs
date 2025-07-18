@@ -2,9 +2,8 @@
 using Microsoft.OpenApi.Models;
 using RestauSimplon.Data_Existante;
 using RestauSimplon.Endpoints;
+using RestauSimplon.GestionArticle;
 using RestauSimplon.GestionClient;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Numerics;
 
 namespace RestauSimplon
 {
@@ -19,6 +18,10 @@ namespace RestauSimplon
 
             builder.Services.AddDbContext<GroupCommandeDb>(opt => opt.UseSqlite("Data Source=GroupCommandeDb.db"));
 
+            builder.Services.AddDbContext<ArticleDb>(opt => opt.UseSqlite("Data Source=ArticleDb.db"));
+          
+            builder.Services.AddDbContext<CommandeDb>(opt => opt.UseSqlite("Data Source=CommandeDb.db"));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
@@ -26,7 +29,8 @@ namespace RestauSimplon
                 {
                     Title = "RestauSimplon",
                     Version = "v1",
-                    Description = "Une API pour gérer les clients et commandes du restaurant",
+                    Description = 
+                    "Une API pour gérer les clients et commandes du restaurant",
                     Contact = new OpenApiContact
                     {
                         Name = "Groupe Best",
@@ -39,15 +43,12 @@ namespace RestauSimplon
 
             var app = builder.Build();
 
-// -- Ajout de plats.json dans la BDD --
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
-    Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
-}
-
-
-
+            // -- Ajout de plats.json dans la BDD --
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ArticleDb>();
+                Task.Run(() => ArticleSeeder.SeedAsync(db)).Wait();
+            }
             // -- Ajout de clients.json dans la BDD --
             using (var scope = app.Services.CreateScope())
             {
@@ -61,8 +62,8 @@ using (var scope = app.Services.CreateScope())
             // -- Appelle la methode permettant de generer les endpoints de /articles --
             app.MapGroup("/articles").MapArticleEndpoints();
 
-            // -- Appelle la méthode permettant de générer les endpoints de /commande -- REFACTO --
-            GestionCommande.MapEndpoints(app);
+            // -- Appelle la méthode permettant de générer les endpoints de /commandes --
+            app.MapGroup("/commandes").MapCommandeEndpoints();
 
             // -- Appelle la méthode permettant de générer les endpoints de /groupes-commandes --
             app.MapGroup("/groupe-commandes").MapGroupEndpoints();
@@ -76,7 +77,6 @@ using (var scope = app.Services.CreateScope())
                     c.RoutePrefix = "";
                 });
             }
-
 
             app.Run();
         }

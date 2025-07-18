@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RestauSimplon.GestionArticle;
 using RestauSimplon.GestionClient;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestauSimplon.Endpoints
 {
@@ -51,6 +53,14 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> CreerClient(ClientsDTO clientsDTO, ClientsDb db)
         {
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(clientsDTO, null, null);
+            
+            if (!Validator.TryValidateObject(clientsDTO, contextValidation, validationResults, true)) 
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
             var client = new Clients
             {
                 Nom = clientsDTO.Nom,
@@ -69,6 +79,15 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> MettreAJourClient(int id, ClientsDTO clientDTO, ClientsDb db)
         {
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(clientDTO, null, null);
+
+            if (!Validator.TryValidateObject(clientDTO, contextValidation, validationResults, true))
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
+
             var client = await db.Clients.FindAsync(id);
 
             if (client is null) return TypedResults.NotFound();

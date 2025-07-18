@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel.DataAnnotations;
 using RestauSimplon.GestionArticle;
 namespace RestauSimplon.Endpoints
 {
@@ -63,6 +64,14 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> CreerArticle(ArticleDTO articlesDTO, ArticleDb db)
         {
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(articlesDTO, null, null);
+
+            if (!Validator.TryValidateObject(articlesDTO, contextValidation, validationResults, true))
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
             var article = new Article
             {
                 Nom = articlesDTO.Nom,
@@ -80,6 +89,16 @@ namespace RestauSimplon.Endpoints
 
         static async Task<IResult> MettreAJourArticle(int id, ArticleDTO articleDTO, ArticleDb db)
         {
+
+            var validationResults = new List<ValidationResult>();
+            var contextValidation = new ValidationContext(articleDTO, null, null);
+
+            if (!Validator.TryValidateObject(articleDTO, contextValidation, validationResults, true)) 
+            {
+                var errors = validationResults.Select(v => v.ErrorMessage);
+                return TypedResults.BadRequest(new { Errors = errors });
+            }
+
             var article = await db.Articles.FindAsync(id);
 
             if (article is null) return TypedResults.NotFound();

@@ -22,7 +22,7 @@ namespace RestauSimplon.Endpoints
             // -- Create une nouvelle ligne dans la table client --
             group.MapPost("/", CreerClient)
                 .WithMetadata(new SwaggerOperationAttribute(
-                    summary: "Rajouter un client",
+                    summary: "Ajouter un client",
                     description: "Rajoute un client dans la base de donnée"))
                 .WithMetadata(new SwaggerResponseAttribute(200, "Client ajouté"))
                 .WithMetadata(new SwaggerResponseAttribute(404, "Erreur de l'ajout client"));

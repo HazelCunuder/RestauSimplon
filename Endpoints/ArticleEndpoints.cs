@@ -30,7 +30,7 @@ namespace RestauSimplon.Endpoints
             // -- Create une nouvelle ligne dans la table article --
             group.MapPost("/", CreerArticle)
                 .WithMetadata(new SwaggerOperationAttribute(
-                    summary: "Rajouter un article",
+                    summary: "Ajouter un article",
                     description: "Rajoute un article dans la base de donnée"))
                 .WithTags("Articles")
                 .WithMetadata(new SwaggerResponseAttribute(200, "article ajouté"))

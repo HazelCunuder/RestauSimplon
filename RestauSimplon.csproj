@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Front-End\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
